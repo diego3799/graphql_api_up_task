@@ -17,7 +17,7 @@ const typeDefs = gql`
 
   type Query {
     obtenerProyectos: [Proyecto]
-    obtenerTareas(input: ProyectoIDInput!): [Tarea]
+    obtenerTareas(input: ProyectoIDInput): [Tarea]
   }
 
   input ProyectoIDInput {
@@ -40,15 +40,18 @@ const typeDefs = gql`
   }
   input TareaInput {
     nombre: String!
-    proyecto: String!
+    proyecto: String
   }
   type Mutation {
-    #proyectos
+    #usuarios
     crearUsuario(input: UsuarioInput): String
     autenticarUsuario(input: AutenticarInput): Token
+
+    #proyectos
     nuevoProyecto(input: ProyectoInput): Proyecto
     actualizarProyecto(id: ID!, input: ProyectoInput): Proyecto
     eliminarProyecto(id: ID!): String
+
     #Tareas
     nuevaTarea(input: TareaInput): Tarea
     actualizarTarea(id: ID!, input: TareaInput, estado: Boolean): Tarea

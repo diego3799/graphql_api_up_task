@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config({ path: "variables.env" });
 
 const crearToken = (user, secret, expiresIn) => {
-  const { id, email } = user;
-  return jwt.sign({ id, email }, secret, { expiresIn });
+  const { id, email, nombre } = user;
+  return jwt.sign({ id, email,nombre }, secret, { expiresIn });
 };
 
 const resolvers = {
@@ -56,7 +56,7 @@ const resolvers = {
       }
 
       return {
-        token: crearToken(existeUsuario, process.env.SECRETA, "2hr"),
+        token: crearToken(existeUsuario, process.env.SECRETA, "4hr"),
       };
     },
     nuevoProyecto: async (_, { input }, ctx) => {

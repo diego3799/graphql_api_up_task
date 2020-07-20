@@ -9,6 +9,8 @@ const conectarDB = require("./config/db");
 
 const jwt= require('jsonwebtoken')
 
+
+
 conectarDB();
 
 const server = new ApolloServer({
@@ -16,14 +18,16 @@ const server = new ApolloServer({
   resolvers,
   context: ({ req }) => {
     const token = req.headers.authorization || "";
+
     if(token){
         try {
-            const usuario= jwt.verify(token,process.env.SECRETA)
+            const usuario= jwt.verify(token.replace('Bearer ',""),process.env.SECRETA)
+            console.log(usuario);
             return {
                 usuario
             }
         } catch (error) {
-            
+            console.log(error);
         }
     }
   },
